@@ -21,7 +21,7 @@
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="logo"></ion-icon>
-        SaudeSocial
+        PsyMeet
       </ion-card-title>
     </ion-card-header>
   
@@ -49,104 +49,98 @@
   <ion-card class="ion-card-no-shadow">
     <ion-card-title>Increva-se aqui</ion-card-title>
     <ion-card class="ion-card-no-shadow" id="form">
-      <form [formGroup]="signUpForm" (ngSubmit)="submit()">
-        <ion-list lines="none">
-            <ion-item>
-                <ion-input
-                    label="Nome Completo*"
-                    labelPlacement="stacked"
-                    placeholder="Nome Completo*"
-                    formControlName="nome"
-                ></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-input
-                    label="Telefone (Whatsapp)*"
-                    labelPlacement="stacked"
-                    placeholder="Telefone (Whatsapp)*"
-                    formControlName="telefone"
-                ></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-input
-                    label="E-mail*"
-                    labelPlacement="stacked"
-                    placeholder="E-mail*"
-                    formControlName="email"
-                ></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-input
-                    label="CRP*"
-                    labelPlacement="stacked"
-                    placeholder="CRP*"
-                    formControlName="crp"
-                ></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-select
-                    label="Especialidades"
-                    label-placement="stacked"
-                    [multiple]="true"
-                    formControlName="especialidades"
-                >
-                    <ion-select-option value="apple">Apple</ion-select-option>
-                    <ion-select-option value="banana">Banana</ion-select-option>
-                    <ion-select-option value="orange">Orange</ion-select-option>
-                </ion-select>
-            </ion-item>
-            <ion-item>
-                <ion-select
-                    label="Abordagens"
-                    label-placement="stacked"
-                    [multiple]="true"
-                    formControlName="abordagens"
-                >
-                    <ion-select-option value="apple">Apple</ion-select-option>
-                    <ion-select-option value="banana">Banana</ion-select-option>
-                    <ion-select-option value="orange">Orange</ion-select-option>
-                </ion-select>
-            </ion-item>
-            <ion-item>
-                <ion-select
-                    label="Idiomas"
-                    label-placement="stacked"
-                    [multiple]="true"
-                    formControlName="idiomas"
-                >
-                    <ion-select-option value="apple">Apple</ion-select-option>
-                    <ion-select-option value="banana">Banana</ion-select-option>
-                    <ion-select-option value="orange">Orange</ion-select-option>
-                </ion-select>
-            </ion-item>
-            <ion-item>
-                <ion-checkbox labelPlacement="end" class="textinho" formControlName="termos"
-                    >Li e concordo com os
-                    <span class="break-text">
-                        termos de uso e com a politíca de privacidade
-                    </span>
-                ></ion-checkbox>
-            </ion-item>
-            <ion-item>
-                <ion-input
-                    label="Senha*"
-                    type="password"
-                    labelPlacement="stacked"
-                    placeholder="Senha*"
-                    formControlName="password"
-                ></ion-input>
-                <ion-input
-                    label="Confirme sua senha*"
-                    type="password"
-                    labelPlacement="stacked"
-                    placeholder="Confirme sua senha*"
-                    formControlName="confirmPassword"
-                ></ion-input>
-            </ion-item>
-        </ion-list>
-        <ion-button id="alerta" color="medium" type="submit" (click)="submit()">Cadastrar</ion-button>
-    </form>
-    
+      <ion-list lines="none">
+        <ion-item>
+          <ion-input
+            label="Nome Completo*"
+            labelPlacement="stacked"
+            placeholder="Nome Completo*"
+            [(ngModel)]="name"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Telefone (Whatsapp)*"
+            labelPlacement="stacked"
+            placeholder="Telefone (Whatsapp)*"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="E-mail*"
+            labelPlacement="stacked"
+            placeholder="E-mail*"
+            [(ngModel)]="email"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="CRP*"
+            labelPlacement="stacked"
+            placeholder="CRP*"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select
+            label="Especialidades"
+            label-placement="stacked"
+            [multiple]="true"
+          >
+            <ion-select-option value="apple">Apple</ion-select-option>
+            <ion-select-option value="banana">Banana</ion-select-option>
+            <ion-select-option value="orange">Orange</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-select
+            label="Abordagens"
+            label-placement="stacked"
+            [multiple]="true"
+          >
+            <ion-select-option value="apple">Apple</ion-select-option>
+            <ion-select-option value="banana">Banana</ion-select-option>
+            <ion-select-option value="orange">Orange</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-select
+            label="Idiomas"
+            label-placement="stacked"
+            [multiple]="true"
+          >
+            <ion-select-option value="apple">Apple</ion-select-option>
+            <ion-select-option value="banana">Banana</ion-select-option>
+            <ion-select-option value="orange">Orange</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-checkbox labelPlacement="end" class="textinho"
+            >Li e concordo com os
+            <span class="break-text">
+              termos de uso e com a politíca de privacidade</span
+            ></ion-checkbox
+          >
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Senha*"
+            type="password"
+            labelPlacement="stacked"
+            placeholder="Senha*"
+            [(ngModel)]="password"
+          ></ion-input>
+          <ion-input
+            label="Confirme sua senha*"
+            type="password"
+            labelPlacement="stacked"
+            [(ngModel)]="check"
+            placeholder="Confirme sua senha*"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button id="alerta" color="medium" (click)="signup()"
+        >Cadastrar</ion-button
+      >
     </ion-card>
     <ion-card-content></ion-card-content>
   </ion-card>

@@ -1,118 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Firestore } from '@angular/fire/firestore';
 import { NavController } from '@ionic/angular';
 
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  NonNullableFormBuilder,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { Router } from '@angular/router';
-import { HotToastService } from '@ngneat/hot-toast';
-import { switchMap } from 'rxjs/operators';
-import { AuthenticationService } from 'src/app/services/auth.service';
-import { UsersService } from 'src/app/services/users.service';
 
-export function passwordsMatchValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
-
-    if (password && confirmPassword && password !== confirmPassword) {
-      return { passwordsDontMatch: true };
-    } else {
-      return null;
-    }
-  };
-}
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss'],
 })
 export class CadastroPage implements OnInit {
-  signUpForm = this.fb.group(
-    {
-      nome: ['', ],
-      email: ['', ],
-      password: ['',],
-      confirmPassword: ['', ],
-
-      telefone: [''],
-      crp: [''],
-      especialidades: [''],
-      abordagens: [''],
-      idiomas: [''],
-      termos: [false],
-    },
-    { validators: passwordsMatchValidator() }
-  );
+  email: string = '';
+  name: string = '';
+  password: string = '';
+  check: string = '';
 
   constructor(
-    private authService: AuthenticationService,
-    private router: Router,
-    private toast: HotToastService,
-    private usersService: UsersService,
-    private fb: NonNullableFormBuilder
+    public navCntrl: NavController,
+    private auth: Auth,
+    private firestore: Firestore // Adicione isso
   ) {}
-  ngOnInit(): void {}
 
-  get email() {
-    return this.signUpForm.get('email');
-  }
+  async signup() {
+    if (this.password == this.check) {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          this.auth,
+          this.email,
+          this.password
+        );
+        const user = userCredential.user;
 
-  get password() {
-    return this.signUpForm.get('password');
-  }
+        // Salvar dados do usuário no Firestore
+        await this.firestore.collection('users').doc(user.uid).set({
+          email: this.email,
+          name: this.name,
+          // Você pode adicionar mais campos aqui conforme necessário
+        });
 
-  get confirmPassword() {
-    return this.signUpForm.get('confirmPassword');
-  }
+        console.log(user);
 
-  get nome() {
-    return this.signUpForm.get('nome');
-  }
-
-  async submit() {
-    const { nome, email, password } = this.signUpForm.value;
-
-    if (!this.signUpForm.valid || !nome || !password || !email) {
-      return;
+        // Redireciona para a página inicial após cadastro bem-sucedido
+        this.gotoHome();
+      } catch (error) {
+        console.error("Erro ao criar usuário:", error);
+        // Aqui você pode lidar com erros de cadastro, como mostrar uma mensagem para o usuário.
+      }
+    } else {
+      return alert('As senhas diferem!');
     }
+  }
 
-    this.authService
-      .signUp(email, password)
-      .pipe(
-        switchMap(({ user: { uid } }) =>
-          this.usersService.addUser({
-            uid,
-            email,
-            senha: '',
-            nome: '',
-            telefone: '',
-            sexo: '',
-            CRP: '',
-            valorConsulta: 0,
-            idiomas: [],
-            abordagem: '',
-            bio: '',
-            tags: [],
-            photoURL: '',
-          })
-        ),
-        this.toast.observe({
-          success: 'Congrats! You are all signed up',
-          loading: 'Signing up...',
-          error: ({ message }) => `${message}`,
-        })
-      )
-      .subscribe(() => {
-        this.router.navigate(['/home']);
-      });
+  ngOnInit() {}
+  gotoHome() {
+    this.navCntrl.navigateForward('/');
   }
 }
