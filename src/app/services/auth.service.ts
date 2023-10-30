@@ -4,36 +4,38 @@ import {
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 	signOut,
-  authState
+  authState,
+  UserCredential
 } from '@angular/fire/auth';
 
+import { concatMap, from, Observable, of } from 'rxjs';
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthService {
-	constructor(private auth: Auth) {}
-
-  currentUser$ = authState(this.auth) 
+export class AuthenticationService {
+  currentUser$ = authState(this.auth);
   
-	async register({ email, password }: { email: string, password: string }) {
-		try {
-			const user = await createUserWithEmailAndPassword(this.auth, email, password);
-			return user;
-		} catch (e) {
-			return null;
-		}
-	}
+  constructor(private auth: Auth) {}
 
-	async login({ email, password }: { email: string, password: string }) {
-		try {
-			const user = await signInWithEmailAndPassword(this.auth, email, password);
-			return user;
-		} catch (e) {
-			return null;
-		}
-	}
+  signUp(email: string, password: string): Observable<UserCredential> {
+    return from(createUserWithEmailAndPassword(this.auth, email, password));
+  }
 
-	logout() {
-		return signOut(this.auth);
-	}
+  login(email: string, password: string): Observable<any> {
+    return from(signInWithEmailAndPassword(this.auth, email, password));
+  }
+
+  // updateProfile(profileData: Partial<UserInfo>): Observable<any> {
+  //   const user = this.auth.currentUser;
+  //   return of(user).pipe(
+  //     concatMap((user) => {
+  //       if (!user) throw new Error('Not authenticated');
+  //       return updateProfile(user, profileData);
+  //     })
+  //   );
+  // }
+
+  logout(): Observable<any> {
+    return from(this.auth.signOut());
+  }
 }

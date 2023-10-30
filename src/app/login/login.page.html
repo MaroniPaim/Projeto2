@@ -1,22 +1,54 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>My App</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> </ion-title>
 
-<ion-content class="ion-padding">
-  <form (ngSubmit)="login()" [formGroup]="credentials">
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input required type="email" placeholder="Email" formControlName="email"></ion-input>
-      <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email is invalid</ion-note>
-    </ion-item>
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input required type="password" placeholder="Password" formControlName="password"></ion-input>
-      <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">Password needs to be 6
-        characters</ion-note>
+      <!---------------LOGO------------------->
+      <ion-img src="https://i.postimg.cc/6Q9btk9j/logo.png"></ion-img>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+    <ion-item lines="full"
+      ><ion-input
+        label="E-mail*"
+        labelPlacement="stacked"
+        placeholder="exemplo@exemplo.com*"
+        formControlName="email"
+        name="email"
+      ></ion-input>
     </ion-item>
 
-    <ion-button type="submit" expand="block" [disabled]="!credentials.valid">Log in</ion-button>
-    <ion-button type="button" expand="block" color="secondary" (click)="register()">Create account</ion-button>
+    <ion-item lines="full">
+      <ion-input
+        label="Senha*"
+        labelPlacement="stacked"
+        placeholder="Senha*"
+        type="password"
+        formControlName="password"
+        name="password"
+      ></ion-input>
+    </ion-item>
+    <div class="ion-text-center">Não tem uma conta? <a>Inscreva-se</a></div>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" expand="block">Logar</ion-button>
+      </ion-col>
+    </ion-row>
   </form>
+  <br />
+  <div class="ion-text-center">
+    <a>Esqueceu sua senha?</a>
+  </div>
+
+  <div class="ion-text-center">
+    <ion-text color=""
+      ><sub>
+        © 2023 - Aplicativo desenvolvido por
+        <ion-text color="light">Grupo A</ion-text>. <br />Todos os direitos
+        reservados
+      </sub></ion-text
+    >
+  </div>
 </ion-content>

@@ -1,0 +1,40 @@
+#container {
+    text-align: center;
+  
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+    color: #8c8c8c;
+    margin: 0;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+  
+  ion-button {
+    --background: #B2A6CD;
+    --background-activated: #8678A7;
+  
+  }
+  
+  ion-content {
+    // --background: url(https://drive.google.com/file/d/10clsUd6QuLgUxYOaFDVg6rmjqXoQ5R3O/view?usp=share_link) 0 86% no-repeat;
+  }
+  
+  ion-img {
+  
+    height: 150px;
+  }

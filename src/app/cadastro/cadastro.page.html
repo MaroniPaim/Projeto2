@@ -1,0 +1,153 @@
+<div class="rectangular-div">Psicologos Parceiros</div>
+
+<ion-content class="ion-no-margin">
+  <ion-card
+    class="ion-no-margin ion-card-no-border ion-card-no-shadow"
+    id="juntar"
+  ></ion-card>
+
+  <ion-card class="ion-card-no-shadow">
+    <ion-card-title>Por que me juntar ao SaudeSocial</ion-card-title>
+    <ion-list lines="none">
+      <ion-item>Aumentar a sua visibilidade e divulgação na internet, alcançando mais pacientes em potencial.</ion-item>
+      <ion-item>Ter flexibilidade de horários e locais de atendimento, podendo trabalhar de casa ou de onde preferir.</ion-item>
+      <ion-item>Receber o pagamento das consultas diretamente na sua conta bancária, sem intermediários ou taxas extras.</ion-item>
+    </ion-list>
+    <ion-card-content></ion-card-content>
+  </ion-card>
+  
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="logo"></ion-icon>
+        SaudeSocial
+      </ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <!-- Inserir a imagem aqui -->
+      <img src="caminho-da-imagem.jpg" alt="Descrição da imagem">
+      
+      <ion-text>
+        <h2>Mais de 200 mil visitas mensais</h2>
+      </ion-text>
+  
+      <!-- Inserir outra imagem ou ícone aqui -->
+      <img src="caminho-da-segunda-imagem.jpg" alt="Descrição da segunda imagem">
+      
+      <ion-text>
+        Você tem liberdade de negociar todos os detalhes do atendimento com seus pacientes, apenas o valor é fixado.
+      </ion-text>
+  
+      <ion-button expand="full" color="primary">Quero atender na PsyMeet!</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  
+
+  <ion-card class="ion-card-no-shadow">
+    <ion-card-title>Increva-se aqui</ion-card-title>
+    <ion-card class="ion-card-no-shadow" id="form">
+      <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+        <ion-list lines="none">
+            <ion-item>
+                <ion-input
+                    label="Nome Completo*"
+                    labelPlacement="stacked"
+                    placeholder="Nome Completo*"
+                    formControlName="nome"
+                ></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input
+                    label="Telefone (Whatsapp)*"
+                    labelPlacement="stacked"
+                    placeholder="Telefone (Whatsapp)*"
+                    formControlName="telefone"
+                ></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input
+                    label="E-mail*"
+                    labelPlacement="stacked"
+                    placeholder="E-mail*"
+                    formControlName="email"
+                ></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input
+                    label="CRP*"
+                    labelPlacement="stacked"
+                    placeholder="CRP*"
+                    formControlName="crp"
+                ></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-select
+                    label="Especialidades"
+                    label-placement="stacked"
+                    [multiple]="true"
+                    formControlName="especialidades"
+                >
+                    <ion-select-option value="apple">Apple</ion-select-option>
+                    <ion-select-option value="banana">Banana</ion-select-option>
+                    <ion-select-option value="orange">Orange</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-select
+                    label="Abordagens"
+                    label-placement="stacked"
+                    [multiple]="true"
+                    formControlName="abordagens"
+                >
+                    <ion-select-option value="apple">Apple</ion-select-option>
+                    <ion-select-option value="banana">Banana</ion-select-option>
+                    <ion-select-option value="orange">Orange</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-select
+                    label="Idiomas"
+                    label-placement="stacked"
+                    [multiple]="true"
+                    formControlName="idiomas"
+                >
+                    <ion-select-option value="apple">Apple</ion-select-option>
+                    <ion-select-option value="banana">Banana</ion-select-option>
+                    <ion-select-option value="orange">Orange</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-checkbox labelPlacement="end" class="textinho" formControlName="termos"
+                    >Li e concordo com os
+                    <span class="break-text">
+                        termos de uso e com a politíca de privacidade
+                    </span>
+                ></ion-checkbox>
+            </ion-item>
+            <ion-item>
+                <ion-input
+                    label="Senha*"
+                    type="password"
+                    labelPlacement="stacked"
+                    placeholder="Senha*"
+                    formControlName="password"
+                ></ion-input>
+                <ion-input
+                    label="Confirme sua senha*"
+                    type="password"
+                    labelPlacement="stacked"
+                    placeholder="Confirme sua senha*"
+                    formControlName="confirmPassword"
+                ></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-button id="alerta" color="medium" type="submit" (click)="submit()">Cadastrar</ion-button>
+    </form>
+    
+    </ion-card>
+    <ion-card-content></ion-card-content>
+  </ion-card>
+</ion-content>

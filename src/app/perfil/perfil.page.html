@@ -1,0 +1,33 @@
+
+
+<ion-card  *ngIf="user$ | async as user">
+  <h1>Update Profile</h1>
+
+  <ion-card class="profile-image">
+    <img width="120" height="120" class="margin-top" [src]="user.photoURL ?? '/assets/images/image-placeholder.png'" />
+
+    <ion-button fill="clear" size="small" (click)="inputField.click()">
+      <ion-icon slot="icon-only" name="create"></ion-icon>
+    </ion-button>
+  </ion-card>
+
+  <input #inputField hidden type="file" (change)="uploadFile($event, user)" />
+
+  <form class="margin-top" [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+    <ion-card class="row">
+      <ion-input type="text" formControlName="firstName" placeholder="First Name"></ion-input>
+      <ion-input type="text" formControlName="lastName" placeholder="Last Name"></ion-input>
+    </ion-card>
+
+    <ion-card class="row">
+      <ion-input type="text" formControlName="displayName" placeholder="Display Name"></ion-input>
+      <ion-input type="number" formControlName="phone" placeholder="Phone"></ion-input>
+    </ion-card>
+
+    <ion-input type="text" formControlName="address" placeholder="Address"></ion-input>
+
+    <ion-button expand="block" class="margin-top" type="submit" color="primary">
+      Save
+    </ion-button>
+  </form>
+</ion-card>

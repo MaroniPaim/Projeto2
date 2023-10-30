@@ -1,76 +1,64 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import {
+  Auth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from '@angular/fire/auth';
+import { FormsModule, Validators } from '@angular/forms';
+import { Firestore } from '@angular/fire/firestore';
+import { AuthenticationService } from '../services/auth.service';
+import { HotToastService } from '@ngneat/hot-toast';
+import { NonNullableFormBuilder } from '@angular/forms';
 
 @Component({
-	selector: 'app-login',
-	templateUrl: './login.page.html',
-	styleUrls: ['./login.page.scss']
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
-	credentials!: FormGroup;
+export class LoginPage {
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+  });
 
-	constructor(
-		private fb: FormBuilder,
-		private loadingController: LoadingController,
-		private alertController: AlertController,
-		private authService: AuthService,
-		private router: Router,
-    private formBuilder: FormBuilder
-	) {}
+  constructor(
+    private authService: AuthenticationService,
+    private toast: HotToastService,
+    private navCtrl: NavController,
+    private fb: NonNullableFormBuilder
+  ) {}
 
-	// Easy access for form fields
-	get email() {
-		return this.credentials.get('email');
-	}
+  ngOnInit(): void {}
 
-	get password() {
-		return this.credentials.get('password');
-	}
+  get email() {
+    return this.loginForm.get('email');
+  }
 
-	ngOnInit() {
-		this.credentials = this.fb.group({
-			email: ['', [Validators.required, Validators.email]],
-			password: ['', [Validators.required, Validators.minLength(6)]]
-		});
-	}
+  get password() {
+    return this.loginForm.get('password');
+  }
 
-	async register() {
-		const loading = await this.loadingController.create();
-		await loading.present();
+  submit() {
+    const { email, password } = this.loginForm.value;
 
-		const user = await this.authService.register(this.credentials.value);
-		await loading.dismiss();
+    if (!this.loginForm.valid || !email || !password) {
+      return;
+    }
 
-		if (user) {
-			this.router.navigateByUrl('/home', { replaceUrl: true });
-		} else {
-			this.showAlert('Registration failed', 'Please try again!');
-		}
-	}
+    this.authService
 
-	async login() {
-		const loading = await this.loadingController.create();
-		await loading.present();
-
-		const user = await this.authService.login(this.credentials.value);
-		await loading.dismiss();
-
-		if (user) {
-			this.router.navigateByUrl('/home', { replaceUrl: true });
-		} else {
-			this.showAlert('Login failed', 'Please try again!');
-		}
-	}
-
-	async showAlert(header: string, message: string) {
-		const alert = await this.alertController.create({
-			header,
-			message,
-			buttons: ['OK']
-		});
-		await alert.present();
-	}
+      .login(email, password)
+      .pipe(
+        this.toast.observe({
+          success: 'Logged in successfully',
+          loading: 'Logging in...',
+          error: ({ message }) => `There was an error: ${message} `,
+        })
+      )
+      .subscribe(() => {
+        this.navCtrl.navigateForward('/home');
+      });
+  }
 }

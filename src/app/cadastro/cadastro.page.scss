@@ -1,0 +1,29 @@
+.ion-card-no-border {
+    border-radius: 0 !important;
+  }
+  .ion-card-no-shadow {
+    box-shadow: none;
+  }
+  
+  #form {
+    border-style: solid;
+    border-color: black;
+    border-radius: 15px;
+  }
+  
+  #juntar {
+    background: url(https://www.psymeetsocial.com/assets/images/im-a-psy-hero-image.webp)
+      50% / cover;
+  }
+  #beneficios {
+    background-color: blue;
+  }
+  
+  .textinho {
+    font-size: smaller;
+  }
+  
+  .break-text {
+    display: block; /* Isso forçará o texto a quebrar para a próxima linha */
+  }
+  

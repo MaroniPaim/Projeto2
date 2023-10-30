@@ -24,3 +24,98 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.profile {
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px auto;
+    background-color: #fff;
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+h2 {
+    color: #4a4a4a;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+p {
+    color: #7a7a7a;
+    margin: 5px 0;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #B2A6CD; /* A purple-like color */
+    color: #8678A7;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #B2A6CD;
+}
+
+.basic, .specialties {
+    margin-bottom: 10px;
+}
+
+.basic p, .specialties p {
+    background-color: #eaeaea;
+    padding: 8px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+/* Estilos para telas maiores que 768px (tablets, desktops) */
+@media only screen and (min-width: 768px) {
+    .profile {
+        width: 70%; /* ou qualquer outra largura desejada, como 600px */
+        border: 1px solid #e0e0e0;
+        margin: 20px auto;
+    }
+
+    .profile img {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 30px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    button {
+        padding: 15px;
+        font-size: 18px;
+    }
+}
+
+
+
+.rectangular-div {
+    background-color: lightgray;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid gray;
+  }
